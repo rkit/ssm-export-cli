@@ -1,0 +1,186 @@
+{
+  "name": "ssm-export-cli",
+  "version": "1.0.0",
+  "description": "Export parameters from AWS Systems Manager",
+  "main": "dist/cli.js",
+  "types": "dist/cli.d.ts",
+  "directories": {
+    "test": "tests"
+  },
+  "bin": {
+    "ssm-export": "dist/cli.js"
+  },
+  "scripts": {
+    "test": "jest",
+    "start": "tsc --watch",
+    "build": "tsc && npm run size",
+    "size": "size-limit"
+  },
+  "keywords": [
+    "ssm",
+    "aws",
+    "env",
+    "secret",
+    "export",
+    "cli"
+  ],
+  "author": "Igor Romanov <rkit.ru@gmail.com>",
+  "license": "MIT",
+  "size-limit": [
+    {
+      "limit": "10 KB",
+      "path": [
+        "dist/*.js",
+        "dist/client/*.js",
+        "dist/client/utils/*.js",
+        "dist/converter/*.js"
+      ],
+      "webpack": false,
+      "gzip": false
+    }
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.+(js|ts)": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.+(json|css|md|html)": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "es6": true,
+      "browser": false,
+      "node": true,
+      "jest": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint",
+      "jest",
+      "prettier",
+      "unicorn",
+      "import"
+    ],
+    "extends": [
+      "airbnb-base",
+      "plugin:unicorn/recommended",
+      "prettier",
+      "prettier/@typescript-eslint",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:import/typescript"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "sourceType": "module"
+    },
+    "settings": {
+      "import/parsers": {
+        "@typescript-eslint/parser": [
+          ".ts"
+        ]
+      },
+      "import/resolver": {
+        "node": {
+          "paths": [
+            "src",
+            "tests"
+          ],
+          "extensions": [
+            ".js",
+            ".ts"
+          ]
+        }
+      }
+    },
+    "rules": {
+      "prettier/prettier": [
+        "error",
+        {
+          "semi": true,
+          "trailingComma": "es5",
+          "singleQuote": true,
+          "quoteProps": "as-needed",
+          "bracketSpacing": true,
+          "tabWidth": 2,
+          "printWidth": 100,
+          "jsxBracketSameLine": false,
+          "arrowParens": "always"
+        }
+      ],
+      "import/order": [
+        "error",
+        {
+          "groups": [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index"
+          ]
+        }
+      ],
+      "import/extensions": [
+        "error",
+        "ignorePackages",
+        {
+          "js": "never",
+          "ts": "never"
+        }
+      ],
+      "unicorn/no-null": "off",
+      "import/prefer-default-export": "off",
+      "import/no-cycle": "off",
+      "curly": [
+        "error",
+        "all"
+      ],
+      "no-restricted-syntax": [
+        "error",
+        "LabeledStatement",
+        "WithStatement"
+      ],
+      "no-shadow": "off"
+    }
+  },
+  "eslintIgnore": [
+    "dist/",
+    "node_modules/"
+  ],
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^4.6.0",
+    "@types/jest": "^26.0.13",
+    "@types/node": "^14.6.3",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
+    "eslint": "^7.8.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^23.20.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-unicorn": "^21.0.0",
+    "husky": "^4.2.5",
+    "jest": "^26.4.2",
+    "lint-staged": "^10.3.0",
+    "prettier": "^2.1.1",
+    "size-limit": "^4.5.7",
+    "ts-jest": "^26.3.0",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.747.0",
+    "dotenv": "^8.2.0",
+    "kleur": "^4.1.1"
+  }
+}
