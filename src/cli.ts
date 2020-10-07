@@ -6,6 +6,7 @@ import { DotenvConverter } from './converter/dotenv';
 import log from './utils/log';
 import help from './help';
 
+process.env.AWS_SDK_LOAD_CONFIG = 'true';
 process_.onCatchError((error: Error) => log.error(error));
 
 if (process_.optionsCount === 0) {
