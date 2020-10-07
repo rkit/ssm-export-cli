@@ -1,5 +1,7 @@
 # ssm-export-cli
 
+[![Build Status](https://travis-ci.org/rkit/ssm-export-cli.svg?branch=master)](https://travis-ci.org/rkit/ssm-export-cli)
+
 A small library for export parameters from AWS Systems Manager.
 
 ## Supported file types for export
