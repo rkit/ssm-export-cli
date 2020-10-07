@@ -4,6 +4,10 @@
   "description": "Export parameters from AWS Systems Manager",
   "main": "dist/cli.js",
   "types": "dist/cli.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rkit/ssm-export-cli.git"
+  },
   "directories": {
     "test": "tests"
   },
