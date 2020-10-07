@@ -10,13 +10,20 @@ At the moment it's supported only dotenv.
 
 ## Usage
 
-1. Install the package `ssm-export`
+1. Add `ssm-export-cli` to the project:
 
-2. Export parameters:
+   ```sh
+   npm install ssm-export-cli
+   ```
+
+1. Run:
 
    ```sh
    npx ssm-export --path=<PATH> --file-name=<FILE NAME> --type=<TYPE>
    ```
+
+   > to see instructions, run:\
+   > `npx ssm-export`
 
 ## Example
 
