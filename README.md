@@ -4,9 +4,9 @@
 
 A small library for export parameters from AWS Systems Manager.
 
-## Supported file types for export
+## Export File Types
 
-At the moment, only dotenv.
+At the moment it's supported only dotenv.
 
 ## Usage
 
