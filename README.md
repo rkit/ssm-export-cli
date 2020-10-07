@@ -22,7 +22,7 @@ At the moment it's supported only dotenv.
    npx ssm-export --path=<PATH> --file-name=<FILE NAME> --type=<TYPE>
    ```
 
-   > to see instructions, run:\
+   > to see instruction, run:\
    > `npx ssm-export`
 
 ## Example
@@ -30,7 +30,7 @@ At the moment it's supported only dotenv.
 Export parameters with path `/app/production/` to `.env`:
 
 ```sh
-npx ssm-export --path=/app/production/ --file-name=./.env  --type=dotenv
+npx ssm-export --path=/app/production/ --file-name=./.env --type=dotenv
 ```
 
 ## [Changelog](./CHANGELOG.md)
