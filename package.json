@@ -1,6 +1,6 @@
 {
   "name": "ssm-export-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Export parameters from AWS Systems Manager",
   "main": "dist/cli.js",
   "types": "dist/cli.d.ts",
