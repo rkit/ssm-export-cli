@@ -29,14 +29,14 @@ async function main() {
   const { path, filename, type } = process_.options;
 
   const parameters = await client.getParametersByPath(path);
-  console.log(`Retrieve parameters by path ${path}`);
+  console.log(`✔ Retrieve parameters by path ${path}`);
 
   const converter: Converter = new (converterByType(type))(filename, parameters);
 
   await converter.convert();
-  console.log(`Export to ${filename}`);
+  console.log(`✔ Export to ${filename}`);
 
-  console.log('Done');
+  console.log('✔ Done');
   process.exit(0);
 }
 
