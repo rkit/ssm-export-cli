@@ -28,17 +28,15 @@ function converterByType(type: string) {
 async function main() {
   const { path, filename, type } = process_.options;
 
-  const logTask1 = log.task(`Retrieve parameters by path ${path}`);
   const parameters = await client.getParametersByPath(path);
-  logTask1();
+  console.log(`Retrieve parameters by path ${path}`);
 
   const converter: Converter = new (converterByType(type))(filename, parameters);
 
-  const logTask2 = log.task(`Export to ${filename}`);
   await converter.convert();
-  logTask2();
+  console.log(`Export to ${filename}`);
 
-  log.success('Done');
+  console.log('Done');
   process.exit(0);
 }
 
