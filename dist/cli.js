@@ -15,7 +15,6 @@ if (process_1.default.optionsCount === 0) {
     help_1.default.usage();
     process.exit(0);
 }
-const client = new client_1.default({});
 function converterByType(type) {
     switch (type) {
         case 'dotenv':
@@ -25,7 +24,8 @@ function converterByType(type) {
     }
 }
 async function main() {
-    const { path, filename, type } = process_1.default.options;
+    const { path, filename, type, ssoprofile } = process_1.default.options;
+    const client = await client_1.default.create(ssoprofile);
     const parameters = await client.getParametersByPath(path);
     console.log(`✔ Retrieve parameters by path ${path}`);
     const converter = new (converterByType(type))(filename, parameters);

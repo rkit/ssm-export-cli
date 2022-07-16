@@ -14,8 +14,6 @@ if (process_.optionsCount === 0) {
   process.exit(0);
 }
 
-const client = new Client({});
-
 function converterByType(type: string) {
   switch (type) {
     case 'dotenv':
@@ -26,7 +24,9 @@ function converterByType(type: string) {
 }
 
 async function main() {
-  const { path, filename, type } = process_.options;
+  const { path, filename, type, ssoprofile } = process_.options;
+
+  const client = await Client.create(ssoprofile);
 
   const parameters = await client.getParametersByPath(path);
   console.log(`✔ Retrieve parameters by path ${path}`);
