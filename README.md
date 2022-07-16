@@ -19,7 +19,7 @@ At the moment it's supported only dotenv.
 1. Run:
 
    ```sh
-   npx ssm-export --path=<PATH> --file-name=<FILE NAME> --type=<TYPE>
+   npx ssm-export --path=<PATH> --file-name=<FILE NAME> --type=<TYPE> --sso-profile=<SSO PROFILE>
    ```
 
    > to see instruction, run:\
