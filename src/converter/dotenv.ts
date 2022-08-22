@@ -1,4 +1,4 @@
-import { writeFileSync } from 'fs';
+import { writeFileSync, readFileSync } from 'fs';
 import { KeyList } from '../client/client';
 import { Converter } from './converter';
 
@@ -13,9 +13,9 @@ export class DotenvConverter implements Converter {
   }
 
   async convert(): Promise<void> {
+    const environment = readFileSync(this.#filePath, 'utf-8').split('\n');
     const data = Object.keys(this.#parameters).map((item) => `${item}=${this.#parameters[item]}`);
-    const text = data.join('\n');
-
-    writeFileSync(this.#filePath, text, 'utf8');
+    const result = [...data, ...environment.filter((x: any) => x && !data.includes(x))].join('\n');
+    writeFileSync(this.#filePath, result, 'utf8');
   }
 }

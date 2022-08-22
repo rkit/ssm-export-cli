@@ -8,7 +8,7 @@ const credential_provider_sso_1 = require("@aws-sdk/credential-provider-sso");
 const parser_1 = require("./utils/parser");
 class Client {
     static async create(ssoprofile) {
-        console.log(`✔ Using ${ssoprofile ? 'sso ' : ''}profile ${ssoprofile ? ssoprofile : 'default'}`);
+        console.log(`✔ Using ${ssoprofile ? 'sso ' : ''}profile ${ssoprofile || 'default'}`);
         let credentials;
         const client = new Client();
         if (ssoprofile) {
