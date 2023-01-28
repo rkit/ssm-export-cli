@@ -23,15 +23,33 @@ export default class Client {
     return client;
   }
 
-  async getParametersByPath(path: string): Promise<KeyList> {
-    const { Parameters = [] } = await this.client
-      .getParametersByPath({
-        Path: path,
-        WithDecryption: true,
-        Recursive: true,
-      })
+  async fetch(
+    requestParameters: SSM.GetParametersByPathRequest,
+    SSMParameters: SSM.ParameterList = []
+  ): Promise<KeyList> {
+    const { NextToken, Parameters = [] } = await this.client
+      .getParametersByPath(requestParameters)
       .promise();
+    const parameters = [...Parameters, ...SSMParameters];
 
-    return parseParameters(Parameters);
+    if (NextToken) {
+      return this.fetch(
+        {
+          ...requestParameters,
+          NextToken,
+        },
+        parameters
+      );
+    }
+
+    return parseParameters(parameters);
+  }
+
+  async getParametersByPath(path: string): Promise<KeyList> {
+    return this.fetch({
+      Path: path,
+      WithDecryption: true,
+      Recursive: true,
+    });
   }
 }

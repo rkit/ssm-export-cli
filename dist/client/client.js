@@ -17,15 +17,22 @@ class Client {
         client.client = new ssm_1.default(credentials ? { credentials } : {});
         return client;
     }
+    async fetch(requestParams, SSMParams = []) {
+        const { NextToken, Parameters = [] } = await this.client.getParametersByPath(requestParams).promise();
+        const params = [...Parameters, ...SSMParams];
+        if (NextToken)
+            return this.fetch({
+                ...requestParams,
+                NextToken: NextToken,
+            }, params);
+        return parser_1.parseParameters(params);
+    }
     async getParametersByPath(path) {
-        const { Parameters = [] } = await this.client
-            .getParametersByPath({
+        return this.fetch({
             Path: path,
             WithDecryption: true,
             Recursive: true,
-        })
-            .promise();
-        return parser_1.parseParameters(Parameters);
+        });
     }
 }
 exports.default = Client;
