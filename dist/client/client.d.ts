@@ -5,6 +5,6 @@ export declare type KeyList = {
 export default class Client {
     private client;
     static create(ssoprofile: string): Promise<Client>;
-    fetch(requestParams: SSM.GetParametersByPathRequest, SSMParams?: SSM.ParameterList): Promise<KeyList>;
+    fetch(requestParameters: SSM.GetParametersByPathRequest, SSMParameters?: SSM.ParameterList): Promise<KeyList>;
     getParametersByPath(path: string): Promise<KeyList>;
 }
