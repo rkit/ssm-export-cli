@@ -14,8 +14,13 @@ export class DotenvConverter implements Converter {
 
   async convert(): Promise<void> {
     const environment = readFileSync(this.#filePath, 'utf-8').split('\n');
-    const data = Object.keys(this.#parameters).map((item) => `${item}=${this.#parameters[item]}`);
-    const result = [...data, ...environment.filter((x: any) => x && !data.includes(x))].join('\n');
+    const parametersKeys = Object.keys(this.#parameters);
+    const data = parametersKeys.map((item) => `${item}=${this.#parameters[item]}`);
+    const filteredEnvironment = environment.filter((x: any) => {
+      const [key] = x.split('=');
+      return key && !parametersKeys.includes(key);
+    });
+    const result = [...data, ...filteredEnvironment].join('\n');
     writeFileSync(this.#filePath, result, 'utf8');
   }
 }
