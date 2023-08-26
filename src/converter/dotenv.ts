@@ -13,14 +13,21 @@ export class DotenvConverter implements Converter {
   }
 
   async convert(): Promise<void> {
-    const environment = readFileSync(this.#filePath, 'utf-8').split('\n');
-    const parametersKeys = Object.keys(this.#parameters);
-    const data = parametersKeys.map((item) => `${item}=${this.#parameters[item]}`);
-    const filteredEnvironment = environment.filter((x: any) => {
-      const [key] = x.split('=');
-      return key && !parametersKeys.includes(key);
-    });
-    const result = [...data, ...filteredEnvironment].join('\n');
-    writeFileSync(this.#filePath, result, 'utf8');
+    try {
+      const environment = readFileSync(this.#filePath, 'utf-8').split('\n');
+      const parametersKeys = Object.keys(this.#parameters);
+      const data = parametersKeys.map((item) => `${item}=${this.#parameters[item]}`);
+      const filteredEnvironment = environment.filter((x: any) => {
+        const [key] = x.split('=');
+        return key && !parametersKeys.includes(key);
+      });
+      const result = [...data, ...filteredEnvironment].join('\n');
+      writeFileSync(this.#filePath, result, 'utf8');
+    } catch {
+      const parametersKeys = Object.keys(this.#parameters);
+      const data = parametersKeys.map((item) => `${item}=${this.#parameters[item]}`);
+      const result = data.join('\n');
+      writeFileSync(this.#filePath, result, 'utf8');
+    }
   }
 }
